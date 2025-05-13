@@ -1,0 +1,10 @@
+label{
+    display: block;
+}
+
+#fioError,#emailError,#passwordError{
+    color: red;
+}
+.checkbox-container{
+    display: flex;
+}

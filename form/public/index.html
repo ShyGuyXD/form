@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head> 
+    <meta charset="UTF-8">
+    <title>Форма регистрации</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+   <h1 class="title">Отправка формы</h1>
+    <form class="reg-form" id="feedbackForm">
+        <input class="fio" id="fio" type="text" name="fio" placeholder="ФИО">
+        <div id="fioError"></div>
+
+        <input class="email" id="email" type="text" name="email" placeholder="email" autocomplete="username">
+        <div id="emailError"></div>
+
+        <input class="message" id="message" type="text" name="message" placeholder="сообщение">
+
+        <input class="button submit" type="submit" value="Отправить">
+    </form>
+    <div id="response"></div>
+    <div id="sentMessages">
+       <h2>Отправленные сообщения:</h2>
+       <div class="messagesList" id="messagesList"></div>
+   </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/message.js"></script>
+</body>
+</html>

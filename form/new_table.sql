@@ -1,1 +1,0 @@
-SELECT * FROM new_schema.new_table;

@@ -1,0 +1,4 @@
+submit_form:
+    path: /api/submit-form
+    controller: App\Controller\HeheController::submitForm
+    methods: [POST, OPTIONS]

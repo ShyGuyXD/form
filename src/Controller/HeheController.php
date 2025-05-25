@@ -48,6 +48,7 @@ return new Response($content);
            return $this->createCorsResponse(['errors' => $validator->errors], 400);
        }*/
 
+       
        $name = $data['fio'];
        $email = $data['email'];
        $message = $data['message'];

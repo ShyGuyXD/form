@@ -1,8 +1,12 @@
 submit_form:
-  path: /api/submit-form
+  path: /submit_form
   controller: App\Controller\HeheController::submitForm
   methods: [POST, OPTIONS, GET]
 localhost:
   path: /
   controller: App\Controller\HeheController::localhost
+  methods: [POST, OPTIONS, GET]
+getMessages:
+  path: /get_messages
+  controller: App\Controller\HeheController::getMessages
   methods: [POST, OPTIONS, GET]

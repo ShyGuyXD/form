@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   noPatronymicCheckbox.addEventListener("change", function () {
     if (this.checked) {
       fioInput.placeholder = "Фамилия Имя";
-    } else {
+    } else { 
       fioInput.placeholder = "ФИО";
     }
   });

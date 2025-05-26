@@ -25,18 +25,14 @@ class HeheController extends AbstractController
         $database = new Database();
         $connection = $database->conn;
 
-        $stmt = $connection->prepare("SELECT fio, message FROM new_table WHERE email = ?");
-        $stmt->bind_param("s", $email);
+        $stmt = $connection->prepare("SELECT fio, message FROM new_table WHERE email = :email");
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $result = $stmt->get_result();
-
-        $messages = [];
-        while ($row = $result->fetch_assoc()) {
-            $messages[] = $row;
-        }
+        $messages = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         return $this->createCorsResponse($messages);
     }
+
     /**
      * @Route("/", name="localhost", methods={"POST", "OPTIONS", "GET"})
      */
@@ -66,18 +62,14 @@ class HeheController extends AbstractController
             return $this->createCorsResponse(['error' => 'Нет данных.'], 400);
         }
 
-
         $database = new Database();
         $connection = $database->conn;
 
-
         $validator = new Validator($connection);
-
 
         if (!$validator->validate($data)) {
             return $this->createCorsResponse(['errors' => $validator->errors], 400);
         }
-
 
         $name = $data['fio'];
         $email = $data['email'];
@@ -89,6 +81,7 @@ class HeheController extends AbstractController
             return $this->createCorsResponse(['error' => 'Не удалось сохранить данные.'], 500);
         }
     }
+
     private function createCorsResponse($data, $status = 200)
     {
         $response = new JsonResponse($data, $status);

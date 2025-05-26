@@ -1,5 +1,6 @@
 <?php
 namespace App\classes;
+
 class Database
 {
     private $servername = "localhost";
@@ -10,15 +11,17 @@ class Database
 
     public function __construct()
     {
-        $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
-        if (!$this->conn) {
-            die("Ошибка подключения: " . mysqli_connect_error());
+        try {
+            $this->conn = new \PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+            $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            die("Ошибка подключения: " . $e->getMessage());
         }
     }
 
     public function close()
     {
-        mysqli_close($this->conn);
+        $this->conn = null;
     }
 }
 ?>

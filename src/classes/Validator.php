@@ -13,9 +13,9 @@ class Validator
 
     public function validate($data)
     {
-        $name = mysqli_real_escape_string($this->conn, trim($data['fio']));
-        $email = mysqli_real_escape_string($this->conn, trim($data['email']));
-        $message = mysqli_real_escape_string($this->conn, trim($data['message']));
+        $name = trim($data['fio']);
+        $email = trim($data['email']);
+        $message = trim($data['message']);
         $noPatronymic = isset($data['noPatronymic']) && $data['noPatronymic'] === 'true';
 
         if (empty($name)) {
@@ -50,8 +50,10 @@ class Validator
 
     public function save($name, $email, $message)
     {
-        $stmt = $this->conn->prepare("INSERT INTO new_table (fio, email, message) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $email, $message);
+        $stmt = $this->conn->prepare("INSERT INTO new_table (fio, email, message) VALUES (:fio, :email, :message)");
+        $stmt->bindParam(':fio', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':message', $message);
         return $stmt->execute();
     }
 }
